@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporte_producto" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d57d1382-0f9c-4f54-8150-c2f1b1a8984d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="idProducto" class="java.lang.Integer"/>
+	<field name="idInsumo" class="java.lang.Integer"/>
+	<field name="tiempo" class="java.lang.Integer"/>
+	<field name="deProducto" class="java.lang.String"/>
+	<field name="deInsumo" class="java.lang.String"/>
+	<field name="simbolo" class="java.lang.String"/>
+	<field name="cantidad" class="java.lang.Double"/>
+	<variable name="conteo" class="java.lang.Integer" resetType="Group" resetGroup="gpProducto" incrementType="Group" incrementGroup="gpProducto" calculation="Count">
+		<variableExpression><![CDATA[$F{idInsumo}]]></variableExpression>
+	</variable>
+	<group name="gpProducto">
+		<groupExpression><![CDATA[$F{idProducto}]]></groupExpression>
+		<groupHeader>
+			<band height="20">
+				<rectangle>
+					<reportElement uuid="58902184-3909-4d65-b0d8-5495de7157dc" x="0" y="0" width="555" height="20" forecolor="#FFFFFF" backcolor="#0066CC"/>
+				</rectangle>
+				<textField>
+					<reportElement uuid="78e36d64-a3f8-4e96-a5d3-99ac878319d9" x="0" y="0" width="43" height="20" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="13" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{idProducto}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="e03ef2fe-364f-431f-b2c0-81a520d693a6" x="43" y="0" width="134" height="20" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="13" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{deProducto}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="f8588e2c-3778-486f-9cb0-c3260a81f83a" x="310" y="0" width="245" height="20" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="13" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["TIEMPO PREPARACION "+$F{tiempo}+" MIN."]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="59" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="600f3485-e2ff-426a-ac6c-48b513ece1a9" x="0" y="0" width="555" height="54"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="40" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE PRODUCTOS]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="41" splitType="Stretch">
+			<textField>
+				<reportElement uuid="55be3425-2db7-40a1-b9a2-150d31c38ea0" x="84" y="8" width="55" height="20"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{simbolo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2660506a-bfb4-4309-bb46-029b4ed9752d" x="43" y="8" width="41" height="20"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="bbda5698-0f38-4832-965d-3b0d4fd3f63a" x="139" y="8" width="171" height="20"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{deInsumo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="116" splitType="Stretch">
+			<bar3DChart>
+				<chart>
+					<reportElement uuid="0ab46337-9c46-4215-8033-8f246a8741b3" x="0" y="0" width="555" height="116"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Cantidad de Insumo por Producto"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{deProducto}]]></categoryExpression>
+						<valueExpression><![CDATA[$V{gpProducto_COUNT}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<bar3DPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</bar3DPlot>
+			</bar3DChart>
+		</band>
+	</summary>
+</jasperReport>
